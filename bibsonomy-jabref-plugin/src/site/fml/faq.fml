@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     
+     JabRef Bibsonomy Plug-in - Plugin for the reference management 
+    		software JabRef (http://jabref.sourceforge.net/) 
+    		to fetch, store and delete entries from BibSonomy.
+      
+     Copyright (C) 2008 - 2011 Knowledge & Data Engineering Group, 
+                               University of Kassel, Germany
+                               http://www.kde.cs.uni-kassel.de/
+     
+     This program is free software; you can redistribute it and/or
+     modify it under the terms of the GNU General Public License
+     as published by the Free Software Foundation; either version 2
+     of the License, or (at your option) any later version.
+    
+     This program is distributed in the hope that it will be useful,
+     but WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     GNU General Public License for more details.
+     
+     You should have received a copy of the GNU General Public License
+     along with this program; if not, write to the Free Software
+     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+-->
+
+<faqs xmlns="http://maven.apache.org/FML/1.0.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/FML/1.0.1 http://maven.apache.org/xsd/fml-1.0.1.xsd"
+  title="Frequently Asked Questions"
+  toplink="false">
+
+  <part id="connection">
+    <title>Connection</title>
+
+    <faq id="proxy-usage">
+      <question>
+        Can I use the BibSonomy plugin behind a proxy?
+      </question>
+      <answer>
+      	<p>
+      	Yes, that's possible - see <a href="./proxy.html">here</a> for a detailed 
+      	explanation.
+      	</p>
+      	<!--
+        <p>some markup goes here</p>
+        <source>some source code</source>
+        <p>some markup goes here</p>
+        -->
+      </answer>
+    </faq>
+
+    <faq id="connection-refused">
+      <question>
+        I installed the plugin successfully, but cannot connect to BibSonomy 
+        (message is <i>Connection refused</i>). What is the problem?
+      </question>
+      <answer>
+        <p>
+        First, check whether you are behind a proxy; if yes, see
+        <a href="./proxy.html">here</a>
+        how to configure the plugin for usage behind a proxy. 
+        </p>
+        <p>
+        If you are <b>not</b> behind a proxy, another possibility is 
+        that the automatic spammer detection system of BibSonomy has 
+        flagged you as a spammer; in order to check this, post an entry 
+        to BibSonomy and check if it is visible on the main page 
+        <a href="http://www.bibsonomy.org">bibsonomy.org</a>. If not, 
+        you are flagged as a spammer; in such a case, 
+        <a href="./support.html">contact our team</a>, we will re-enable 
+        your account then.
+        </p>
+      </answer>
+    </faq>
+  </part>
+
+  <!--
+  <part id="install">
+    <title>Installation</title>
+    <faq id="how-install">
+      <question>
+        How do I install Foo?
+      </question>
+      <answer>
+        <p>some markup goes here</p>
+      </answer>
+    </faq>
+
+  </part>
+  -->
+
+</faqs>

@@ -1,0 +1,42 @@
+~~
+~~  
+~~  JabRef Bibsonomy Plug-in - Plugin for the reference management 
+~~ 		software JabRef (http://jabref.sourceforge.net/) 
+~~ 		to fetch, store and delete entries from BibSonomy.
+~~   
+~~  Copyright (C) 2008 - 2011 Knowledge & Data Engineering Group, 
+~~                            University of Kassel, Germany
+~~                            http://www.kde.cs.uni-kassel.de/
+~~  
+~~  This program is free software; you can redistribute it and/or
+~~  modify it under the terms of the GNU General Public License
+~~  as published by the Free Software Foundation; either version 2
+~~  of the License, or (at your option) any later version.
+~~ 
+~~  This program is distributed in the hope that it will be useful,
+~~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+~~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+~~  GNU General Public License for more details.
+~~  
+~~  You should have received a copy of the GNU General Public License
+~~  along with this program; if not, write to the Free Software
+~~  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+~~
+
+                                    ------
+                                    Synchronize
+                                    ------
+                                    ------
+                                    ------
+                                    
+Synchronizing local and remote BibTeX entries
+
+  Since version 1.5 it is possible to synchronize your local and remote BiBTeX entries with a singles click.
+  To perform the synchronization simply choose Plugins -> Bibsonomy -> Synchronize.
+  
+  If there is any difference between the publications a dialog pops up with both the local and the remote source of the publication and non equal fields will be highlighted in a bright yellow color.
+  
+[images/screen_7.png] Synchronization dialog
+ 
+  By choosing <<Keep local>> or <<Always keep local>> your local publication will be exported to Bibsonomy. Also <<Always keep local>> remebers your decision for the current session.
+  If you choose <<Keep remote>> or <<Always keep remote>> your local BibTeX entry will be overwritten by the remote entry from Bibsonomy. <<Always keep remote>> also remebers your decision for the whole session.

@@ -1,0 +1,53 @@
+~~
+~~  
+~~  JabRef Bibsonomy Plug-in - Plugin for the reference management 
+~~ 		software JabRef (http://jabref.sourceforge.net/) 
+~~ 		to fetch, store and delete entries from BibSonomy.
+~~   
+~~  Copyright (C) 2008 - 2011 Knowledge & Data Engineering Group, 
+~~                            University of Kassel, Germany
+~~                            http://www.kde.cs.uni-kassel.de/
+~~  
+~~  This program is free software; you can redistribute it and/or
+~~  modify it under the terms of the GNU General Public License
+~~  as published by the Free Software Foundation; either version 2
+~~  of the License, or (at your option) any later version.
+~~ 
+~~  This program is distributed in the hope that it will be useful,
+~~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+~~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+~~  GNU General Public License for more details.
+~~  
+~~  You should have received a copy of the GNU General Public License
+~~  along with this program; if not, write to the Free Software
+~~  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+~~
+
+                                    ------
+                                    Support
+                                    ------
+                                    ------
+                                    ------
+
+Support
+
+  Our goal is to maximise the benefit for your daily work with your publications
+  when working with BibSonomy and the JabRef-Plugin for BibSonomy. If you need
+  support during that, you have the following options:
+  
+  * Have a look at our {{{./mail-lists.html}mailing lists}}; here various around BibSonomy 
+    and the plugin are being discussed.
+  
+  * Submit a post at one of our {{{https://gforge.cs.uni-kassel.de/tracker/?group_id=98}trackers}}; 
+    currently, we offer the following trackers:
+  
+    * {{{https://gforge.cs.uni-kassel.de/tracker/?atid=485&group_id=98&func=browse}Bugtracker}}: For bug reports, malfunctions, problems...
+    
+    * {{{https://gforge.cs.uni-kassel.de/tracker/?atid=486&group_id=98&func=browse}Support Requests}}: For specific support requests
+    
+    * {{{https://gforge.cs.uni-kassel.de/tracker/?atid=487&group_id=98&func=browse}Patches}}: For source code patches
+    
+    * {{{https://gforge.cs.uni-kassel.de/tracker/?atid=488&group_id=98&func=browse}Feature Requests}}: For requests of new features
+    
+  * Finally, if you prefer to have personal contact, you are always free to contact us 
+    directly via email: webmaster - AT - bibsonomy.org.

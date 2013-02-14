@@ -1,0 +1,46 @@
+~~
+~~  
+~~  JabRef Bibsonomy Plug-in - Plugin for the reference management 
+~~ 		software JabRef (http://jabref.sourceforge.net/) 
+~~ 		to fetch, store and delete entries from BibSonomy.
+~~   
+~~  Copyright (C) 2008 - 2011 Knowledge & Data Engineering Group, 
+~~                            University of Kassel, Germany
+~~                            http://www.kde.cs.uni-kassel.de/
+~~  
+~~  This program is free software; you can redistribute it and/or
+~~  modify it under the terms of the GNU General Public License
+~~  as published by the Free Software Foundation; either version 2
+~~  of the License, or (at your option) any later version.
+~~ 
+~~  This program is distributed in the hope that it will be useful,
+~~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+~~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+~~  GNU General Public License for more details.
+~~  
+~~  You should have received a copy of the GNU General Public License
+~~  along with this program; if not, write to the Free Software
+~~  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+~~
+
+                                    ------
+                                    Introduction
+                                    ------
+                                    ------
+                                    ------
+
+BibSonomy JabRef Plugin
+
+  This project builds a BibSonomy plugin for the {{{http://jabref.sourceforge.net/}Jabref}} 
+  Reference Mangement Software.
+
+About BibSonomy
+
+  {{{http://www.bibsonomy.org}BibSonomy}} is a system for sharing bookmarks and lists of literature. When
+  discovering a bookmark or a publication on the web, you can store it on our
+  server. You can add tags to your entry to retrieve it more easily. This is
+  very similar to the bookmarks/favorites that you store within your browser.
+  The advantage of BibSonomy is that you can access your data from whereever
+  you are. Furthermore, you can discover more bookmarks and publications from
+  your friends and other people.
+  

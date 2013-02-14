@@ -1,0 +1,94 @@
+~~
+~~  
+~~  JabRef Bibsonomy Plug-in - Plugin for the reference management 
+~~ 		software JabRef (http://jabref.sourceforge.net/) 
+~~ 		to fetch, store and delete entries from BibSonomy.
+~~   
+~~  Copyright (C) 2008 - 2011 Knowledge & Data Engineering Group, 
+~~                            University of Kassel, Germany
+~~                            http://www.kde.cs.uni-kassel.de/
+~~  
+~~  This program is free software; you can redistribute it and/or
+~~  modify it under the terms of the GNU General Public License
+~~  as published by the Free Software Foundation; either version 2
+~~  of the License, or (at your option) any later version.
+~~ 
+~~  This program is distributed in the hope that it will be useful,
+~~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+~~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+~~  GNU General Public License for more details.
+~~  
+~~  You should have received a copy of the GNU General Public License
+~~  along with this program; if not, write to the Free Software
+~~  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+~~
+
+									------
+									Configuration
+									------
+									------
+									------
+
+Configuring the BibSonomy plugin
+
+  Before you can start working with our plugin you have to provide your bibsonomy.org username and your API key in the plugin's Settings dialog.
+  You can open the dialog by pointing to the Plugins menu and selecting Settings from the BibSonomy menu.
+
+[images/screen_11.jpg] Settings dialog 
+ 
+	* <<Credentials>>
+		
+		* <Username>
+			
+		  Your username at bibsonomy.org. For using the Plugin, it is necessary to have a BibSonomy
+		  account. If you do not yet have one, please {{{http://www.bibsonomy.org/register}register}} - 
+		  it's free and easy!
+		  
+		* <API Key>
+		
+		  This is your "password" to access API. You can get it at {{{http://www.bisonomy.org}bibsonomy.org}} by pointing to your settings page and selecting the settings tab.
+		  When you are logged in, the direct link to your settings page is {{{http://www.bibsonomy.org/settings?seltab=2}http://www.bibsonomy.org/settings?seltab=2}}. 
+		  
+	* <<General>>
+	
+		* <Tag cloud size>
+		
+		  By adjusting the value of the spinner you can set the amount of tags you want to see.
+		  
+		* <Tag cloud order>
+		  
+		  With this field you can set the ordering of the tag cloud. Actually this does not work for the tags of all users.
+		  
+		* <Number of posts to fetch per request>
+		
+		  This value gives you the opportunity to set the amount of how many posts will be transfered per request.
+		  You will be warned if more posts are available on import.
+		  
+		* <Do not warn me, if more posts are available>
+		
+		   By selecting this check box you can disable the warning on import actions.
+		   
+		* <Do not warn me, if a post has no tags assigned>
+		
+		   Disable warning messages, if certain posts do not have assigned any keywords.
+		
+		* <Update tags on startup>
+		
+		   Automatically refresh the tag list as soon as you run JabRef.
+		   
+		* <Upload documents on export>
+		
+		  If you have added documents to the file field of an entry these will automatically uploaded to BibSonomy if this check box is activated.
+		  Uploaded documents will only be visible to you on BibSonomy.
+		  
+		* <Download documents on import>
+		
+		  You can automatically download your private documents from BibSonomy by activating this check box.
+		  
+		* <Default visibility>
+		
+		   Here you can choose whether you exported entries will be available for all users or just for you.
+	
+		* <Extra fields>
+		
+		  This text box contains all the BibTeX fields which should be visible on the Extra tab in the entry editor of JabRef. Fields are separated with a semicolon.

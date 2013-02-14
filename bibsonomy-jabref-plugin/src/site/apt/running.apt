@@ -1,0 +1,69 @@
+~~
+~~  
+~~  JabRef Bibsonomy Plug-in - Plugin for the reference management 
+~~ 		software JabRef (http://jabref.sourceforge.net/) 
+~~ 		to fetch, store and delete entries from BibSonomy.
+~~   
+~~  Copyright (C) 2008 - 2011 Knowledge & Data Engineering Group, 
+~~                            University of Kassel, Germany
+~~                            http://www.kde.cs.uni-kassel.de/
+~~  
+~~  This program is free software; you can redistribute it and/or
+~~  modify it under the terms of the GNU General Public License
+~~  as published by the Free Software Foundation; either version 2
+~~  of the License, or (at your option) any later version.
+~~ 
+~~  This program is distributed in the hope that it will be useful,
+~~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+~~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+~~  GNU General Public License for more details.
+~~  
+~~  You should have received a copy of the GNU General Public License
+~~  along with this program; if not, write to the Free Software
+~~  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+~~
+
+                                    ------
+                                    Running JabRef
+                                    ------
+                                    ------
+                                    ------
+
+Running JabRef
+
+  Running JabRef with our plugin is very easy. All you need to do is running JabRef.
+  The Plugin will be loaded during the start up.
+
+* Running JabRef from a terminal
+
+  To run JabRef from a terminal you first need to point to the directory where you installed JabRef and enter the following command into you terminal. 
+
++--
+java -jar JabRef-2.6.jar
++--  
+
+  <<Beware that your PATH contains the Java installation directory!>>
+  
+* Running JabRef from the Desktop
+
+  Also you can create a link on your Desktop. The command to run JabRef by this way is:
+  
++--
+java -jar /path/to/your/JabRef/Installation/JabRef-2.6.jar
++--
+
+  Or if you are using Windows as operation system
+  
++--
+java -jar P:\ath\to\your\JabRef\Installation\JabRef-2.6.jar
++--
+
+* Activating the BibSonomy sidebar
+
+  If JabRef has successfully loaded you can create a new database by either pointing to the File menu and selecting <<New database>> or clicking on the <<New database>> button on the tool bar.
+  
+  <<You always need to have an opened database in your JabRef to activate the plugin!>>
+  
+  Afterwards you can point to the Plugins menu and select <<Search / fetch entries>> from the BibSonomy sub menu.
+  
+[images/screen_3.jpg] Activate the BibSonomy sidebar.

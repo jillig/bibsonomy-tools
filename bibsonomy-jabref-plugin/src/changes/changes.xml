@@ -1,0 +1,102 @@
+<!--
+
+     
+     JabRef Bibsonomy Plug-in - Plugin for the reference management 
+    		software JabRef (http://jabref.sourceforge.net/) 
+    		to fetch, store and delete entries from BibSonomy.
+      
+     Copyright (C) 2008 - 2011 Knowledge & Data Engineering Group, 
+                               University of Kassel, Germany
+                               http://www.kde.cs.uni-kassel.de/
+     
+     This program is free software; you can redistribute it and/or
+     modify it under the terms of the GNU General Public License
+     as published by the Free Software Foundation; either version 2
+     of the License, or (at your option) any later version.
+    
+     This program is distributed in the hope that it will be useful,
+     but WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     GNU General Public License for more details.
+     
+     You should have received a copy of the GNU General Public License
+     along with this program; if not, write to the Free Software
+     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+-->
+
+<document>
+ 	<properties>
+    	<title>BibSonomy Plugin for JabRef Changes</title>
+    	<author email="benz@cs.uni-kassel.de">Dominik Benz</author>
+  	</properties>
+  	<body>
+  
+    <!--
+    	This document is intended to summarize changes for each release which are
+    	in any way visible in the system. 
+    	
+    	This file is processed by the maven-changes-plugin to produce a nicely formatted 
+    	changelog. The most important attributes of an "action" node are:
+    	
+    	- dev:    the name of the developer [required]
+    	- type:   type of change (add, fix, remove, update) [required]
+    	- issue:  id in gforge bug tracker [optional]
+    	- due-to: name of the person who indicated the bug
+    	
+    	See also http://maven.apache.org/plugins/maven-changes-plugin/changes.html
+    	
+    	For consistent formatting, please Start each description with a capital letter and end it
+    	with a full stop (.) .
+    	
+    	Dominik, 2008-10-10
+    -->
+    	<release version="2.5.2" date="2011-05-04" description="bug fix">
+    		<action dev="dbe" type="fix">Fixed date format bug when trying to upload publications.</action>    	
+    	</release>        
+    	
+    	<release version="2.5.1" date="2011-02-09" description="bug fix">
+    		<action dev="wbi" type="fix">Fixed NullPoinerException when running with clean JabRef.</action>    	
+    	</release>
+    	
+    	<release version="2.5" date="2011-02-09" description="Major update">
+    		<action dev="wbi" type="update">Improvements on user interface.</action>
+    		<action dev="wbi" type="update">Importing entries can now be stopped.</action>
+    		<action dev="wbi" type="update">Changed file handling. Now everything happens automatically.</action>
+    		<action dev="wbi" type="add">Added icons for different actions.</action>
+    	</release>
+    	
+    	<release version="2.0.1" date="2010-03-29" description="Minor update">
+    		<action dev="wbi" type="fix">Fixed file handling bug.</action>
+    		<action dev="wbi" type="fix">Fixed wrong credentials makes plugin unusable bug.</action>
+    	</release>
+    	
+    	<release version="2.0" date="2009-09-28" description="Major update">
+    		<action dev="wbi" type="add">New graphical user interface.</action>
+    		<action dev="wbi" type="add">Full text search for entries.</action>
+    		<action dev="wbi" type="add">Enhanced visibility settings (now user groups / friends possible).</action>
+    	</release>
+    	
+        <release version="1.5" date="2009-09-20" description="Major update">
+    		<action dev="wbi" type="add">Synchronization of local and remote files.</action>
+    		<action dev="wbi" type="add">Download and upload of private documents.</action>
+    		<action dev="wbi" type="add">Some minor bugfixes.</action>
+    	</release>
+    
+    	<release version="1.0" date="2009-02-06" description="Initial release of plugin">
+    		<action dev="wbi" type="add">Upload entries to BibSonomy.</action>
+    		<action dev="wbi" type="add">Fetch entries from BibSonomy by tag (user/world mode).</action>
+    		<action dev="wbi" type="add">Delete entries from BibSonomy.</action>
+    		<action dev="wbi" type="add">Configuration option: Default group when posting entries (public, private, friends).</action>
+    		<action dev="wbi" type="add">Configuration option: Number of entries to be fetched (list length).</action>
+    		<action dev="wbi" type="add">Configuration option: Minimum frequency of tags to be displayed (Min support tag cloud).</action>
+    		<action dev="wbi" type="add">Configuration option: Extra fields to be displayed in "Extra" tab.</action>
+    		<action dev="wbi" type="add">"BibSonomy" tab within JabRef.</action>
+    		<action dev="wbi" type="add">Keyboard Shortcuts and toolbar buttons for upload/download/delete actions.</action>    		
+    	</release>
+    	
+    	
+
+    
+    </body>
+</document>

@@ -1,0 +1,294 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.bibsonomy.jabref</groupId>
+	<artifactId>jabref-bibsonomy-plugin</artifactId>
+	<name>JabRef Bibsonomy Plug-in</name>
+	<version>2.5.2</version>
+	<description>
+		Plugin for the reference management 
+		software JabRef (http://jabref.sourceforge.net/) 
+		to fetch, store and delete entries from BibSonomy.
+	</description>
+	<url>https://gforge.cs.uni-kassel.de/projects/jabref/</url>
+	<organization>
+		<name>Knowledge and Data Engineering Group</name>
+		<url>http://www.kde.cs.uni-kassel.de/</url>
+	</organization>
+	<inceptionYear>2008</inceptionYear>
+	<licenses>
+		<!-- GPL license -->
+		<license>
+			<name>GNU General Public License 2.0</name>
+			<url>src/main/resources/GPL.txt</url>
+		</license>
+	</licenses>
+	<mailingLists>
+		<mailingList>
+			<name>BibSononomy-Discuss: Für Benutzer von BibSonomy, insbesondere auch für auch Fragen zum JabRef-Plugin.</name>
+			<subscribe>https://mail.cs.uni-kassel.de/mailman/listinfo/bibsonomy-discuss</subscribe>
+			<unsubscribe>https://mail.cs.uni-kassel.de/mailman/listinfo/bibsonomy-discuss</unsubscribe>
+			<post>bibsonomy-discuss@cs.uni-kassel.de</post>
+			<archive>https://mail.cs.uni-kassel.de/pipermail/bibsonomy-discuss</archive>
+			<!-- <otherArchives> <otherArchive></otherArchive> </otherArchives> -->
+		</mailingList>
+		<mailingList>
+			<name>Api-Discuss: Für Benutzer und Entwickler der BibSonomy-API.</name>
+			<subscribe>https://mail.cs.uni-kassel.de/mailman/listinfo/api-discuss</subscribe>
+			<unsubscribe>https://mail.cs.uni-kassel.de/mailman/listinfo/api-discuss</unsubscribe>
+			<post>api-discuss@cs.uni-kassel.de</post>
+			<archive>https://mail.cs.uni-kassel.de/pipermail/api-discuss</archive>
+		</mailingList>
+		<mailingList>
+			<name>JabRef-Users: Allgemeine Liste für Benutzer von JabRef (betrieben von sourceforge.net)</name>
+			<subscribe>https://lists.sourceforge.net/lists/listinfo/jabref-users</subscribe>
+			<unsubscribe>https://lists.sourceforge.net/lists/listinfo/jabref-users</unsubscribe>
+			<post>jabref-users@lists.sourceforge.net</post>
+			<archive>http://sourceforge.net/mailarchive/forum.php?forum_name=jabref-users</archive>
+		</mailingList>
+	</mailingLists>
+	<scm>
+		<connection>
+			scm:cvs:ext:continuum@cvs.gforge.cs.uni-kassel.de:/cvsroot/jabref:org.bibsonomy.jabref.plugin
+		</connection>
+		<developerConnection>
+			scm:cvs:ext:${maven.username}@cvs.gforge.cs.uni-kassel.de:/cvsroot/jabref:org.bibsonomy.jabref.plugin
+		</developerConnection>
+	</scm>
+	<issueManagement>
+		<system>GForge</system>
+		<url>https://gforge.cs.uni-kassel.de/tracker/?group_id=98</url>
+	</issueManagement>
+	<ciManagement>
+		<system>Continuum</system>
+		<url>http://www.se.eecs.uni-kassel.de/continuum/</url>
+	</ciManagement>
+	<repositories>
+		<repository>
+			<id>bibsonomy</id>
+			<name>Releases von BibSonomy-Modulen</name>
+			<url>http://dev.bibsonomy.org/maven2/</url>
+		</repository>
+		<repository>
+			<id>biblicious</id>
+			<name>Artifactory-Maven-Proxy auf biblicious.org</name>
+			<url>http://www.biblicious.org:8088/artifactory/repo</url>
+		</repository>
+		<repository>
+			<id>ibiblio</id>
+			<name>Ibiblio Apache Mirror</name>
+			<url>http://www.ibiblio.org/maven/</url>
+		</repository>
+		<repository>
+			<id>inproject</id>
+			<url>file://${project.basedir}/lib/repo/</url>
+			<name>Local in-project repository</name>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>biblicious</id>
+			<name>Artifactory-Maven-Proxy auf biblicious.org</name>
+			<url>
+				http://www.biblicious.org:8088/artifactory/plugins-releases
+			</url>
+		</pluginRepository>
+	</pluginRepositories>
+	<developers>
+		<developer>
+			<id>boogie</id>
+			<name>Waldemar Biller</name>
+			<email>wbiller@gmail.com</email>
+			<roles>
+				<role>Developer</role>
+			</roles>
+		</developer>
+		<developer>
+			<name>Andreas Hotho</name>
+			<id>aho</id>
+			<email>hotho@cs.uni-kassel.de</email>
+			<roles>
+				<role>Project leader</role>
+			</roles>
+			<url>http://www.kde.cs.uni-kassel.de/hotho</url>
+		</developer>
+		<developer>
+			<name>Dominik Benz</name>
+			<id>dbe</id>
+			<email>dbe@cs.uni-kassel.de</email>
+			<roles>
+				<role>Project leader</role>
+				<role>Developer</role>
+			</roles>
+			<url>http://www.kde.cs.uni-kassel.de/benz</url>
+		</developer>
+		<developer>
+			<name>Robert Jaeschke</name>
+			<id>rja</id>
+			<email>jaeschke@cs.uni-kassel.de</email>
+			<roles>
+				<role>Project leader</role>
+				<role>Developer</role>
+			</roles>
+			<url>http://www.kde.cs.uni-kassel.de/jaeschke</url>
+		</developer>
+		<developer>
+			<name>Beate Krause</name>
+			<id>bkr</id>
+			<email>krause@cs.uni-kassel.de</email>
+			<roles>
+				<role>Project leader</role>
+				<role>Developer</role>
+			</roles>
+			<url>http://www.kde.cs.uni-kassel.de/krause</url>
+		</developer>
+	</developers>
+	<distributionManagement>
+		<site>
+			<!-- copy site documentation via webdav to zope -->
+			<id>website-bibsonomy-documentation</id>
+			<url>dav:http://www.bibsonomy.org/help/doc/jabref-plugin/</url>
+		</site>
+	</distributionManagement>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.0-beta-2</version>
+				<configuration>
+					<outputEncoding>UTF-8</outputEncoding>
+					<reportPlugins>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-project-info-reports-plugin</artifactId>
+							<version>2.2</version>
+							<reports>
+								<report>issue-tracking</report>
+								<report>mailing-list</report>
+								<report>project-team</report>
+								<report>summary</report>
+								<report>license</report>
+							</reports>
+						</plugin>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-changes-plugin</artifactId>
+							<version>2.3</version>
+							<configuration>
+								<issueLinkTemplate>
+									%URL%/index.php?func=detail&amp;aid=%ISSUE%&amp;group_id=98&amp;atid=485
+								</issueLinkTemplate>
+							</configuration>
+							<reportSets>
+								<reportSet>
+									<reports>
+										<report>changes-report</report>
+									</reports>
+								</reportSet>
+							</reportSets>
+						</plugin>
+						<plugin>
+							<!-- create javadoc with linked sources -->
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-javadoc-plugin</artifactId>
+							<version>2.7</version>
+							<configuration>
+								<linksource>true</linksource>
+							</configuration>
+						</plugin>
+					</reportPlugins>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.2-beta-5</version>
+				<configuration>
+					<descriptors>
+						<descriptor>src/main/assembly/jar-with-dependencies-excluding-jabref.xml</descriptor>
+					</descriptors>
+					<outputDirectory>
+						${project.build.directory}/site/download/
+					</outputDirectory>
+					<finalName>
+						${project.artifactId}-${project.version}
+					</finalName>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0</version>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+					<compilerArguments>
+						<encoding>UTF-8</encoding>
+					</compilerArguments>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.google.code.maven-license-plugin</groupId>
+				<artifactId>maven-license-plugin</artifactId>
+				<version>1.3.1</version>
+				<configuration>
+					<header>src/etc/header.txt</header>
+					<includes>
+						<include>src/**</include>
+						<include>**/test/**</include>
+					</includes>
+					<excludes>
+						<exclude>target/**</exclude>
+					</excludes>
+					<properties>
+						<year>${project.inceptionYear} - 2011</year>
+						<description>
+							${project.name} - ${project.description}
+						</description>
+					</properties>
+				</configuration>
+			</plugin>
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-release-plugin</artifactId> 
+				<version>2.0-beta-8</version> </plugin> -->
+			<plugin>
+				<!-- generate a source jar during build pase and deploy it along with binary jar -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.1.2</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<!-- Dependencies -->
+	<dependencies>
+		<dependency>
+			<groupId>org.bibsonomy</groupId>
+			<artifactId>bibsonomy-rest-client</artifactId>
+			<version>2.0.14</version>
+		</dependency>
+		<dependency>
+			<groupId>jabref</groupId>
+			<artifactId>jabref</artifactId>
+			<version>2.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>JabRef</groupId>
+			<artifactId>JabRef</artifactId>
+			<version>2.7b</version>
+		</dependency>
+	</dependencies>
+</project>
+

@@ -1,0 +1,54 @@
+~~
+~~  
+~~  JabRef Bibsonomy Plug-in - Plugin for the reference management 
+~~ 		software JabRef (http://jabref.sourceforge.net/) 
+~~ 		to fetch, store and delete entries from BibSonomy.
+~~   
+~~  Copyright (C) 2008 - 2011 Knowledge & Data Engineering Group, 
+~~                            University of Kassel, Germany
+~~                            http://www.kde.cs.uni-kassel.de/
+~~  
+~~  This program is free software; you can redistribute it and/or
+~~  modify it under the terms of the GNU General Public License
+~~  as published by the Free Software Foundation; either version 2
+~~  of the License, or (at your option) any later version.
+~~ 
+~~  This program is distributed in the hope that it will be useful,
+~~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+~~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+~~  GNU General Public License for more details.
+~~  
+~~  You should have received a copy of the GNU General Public License
+~~  along with this program; if not, write to the Free Software
+~~  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+~~
+
+                                    ------
+                                    Fetching entries
+                                    ------
+                                    ------
+                                    ------
+
+Fetching entries
+
+  An important function of the BibSonomy plugin for JabRef is to fetch BibTeX entries from our 
+  social bookmarking site {{http://www.bibsonomy.org}}.
+  This can either be done in user or world mode. In the user mode, you can fetch all entries and tags of 
+  your private collection; in the world mode, you can fetch public tags and entries from all users.
+  
+* Fetching entries with the tag cloud
+  
+  The plugin provides you a tag cloud with the most used tags by you, all users or a certain group you are a member of.
+  Reloading the tagcloud can be achieved by clicking on the <<Refresh>> button on the lower side of the BibSonomy sidebar.
+
+[images/screen_1.jpg] BibSonomy sidebar
+
+  By clicking on a specific tag you can fetch the entries for this tag and manage which entries should be imported to JabRef.
+  
+[images/screen_2.jpg] Some entries for the tag <<social>> ready for import. 
+
+* Searching
+
+  If you want to search for tags or specific words you can use the controls of the Search group. Just enter some words, select the type of the search and hit the search button.
+  
+[images/screen_4.jpg] Search controls.     

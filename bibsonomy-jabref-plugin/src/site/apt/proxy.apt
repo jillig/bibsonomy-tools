@@ -1,0 +1,46 @@
+~~
+~~  
+~~  JabRef Bibsonomy Plug-in - Plugin for the reference management 
+~~ 		software JabRef (http://jabref.sourceforge.net/) 
+~~ 		to fetch, store and delete entries from BibSonomy.
+~~   
+~~  Copyright (C) 2008 - 2011 Knowledge & Data Engineering Group, 
+~~                            University of Kassel, Germany
+~~                            http://www.kde.cs.uni-kassel.de/
+~~  
+~~  This program is free software; you can redistribute it and/or
+~~  modify it under the terms of the GNU General Public License
+~~  as published by the Free Software Foundation; either version 2
+~~  of the License, or (at your option) any later version.
+~~ 
+~~  This program is distributed in the hope that it will be useful,
+~~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+~~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+~~  GNU General Public License for more details.
+~~  
+~~  You should have received a copy of the GNU General Public License
+~~  along with this program; if not, write to the Free Software
+~~  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+~~
+
+                                    ------
+                                    Proxy settings
+                                    ------
+                                    ------
+                                    ------
+
+Usage of the plugin behind a proxy
+
+  When you are using JabRef from a setting behind a proxy, you can still
+  use the BibSonomy plugin. It makes use of the same proxy mechanism as JabRef
+  itself; this means, when you start JabRef with the options
+  
+------------------------------------------------------------
+java -Dhttp.proxyHost="hostname" -Dhttp.proxyPort="portnumber"
+------------------------------------------------------------
+  
+  then the BibSonomy plugin also uses these parameters (replace <hostname> with 
+  the your proxy's hostname and <portnumber> with your proxy's portnumber.
+  
+  If you should still encounter problems, please  
+  {{{./support.html}contact our team}} - we'll be glad to help you!

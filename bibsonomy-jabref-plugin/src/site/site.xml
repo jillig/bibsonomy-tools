@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+
+     
+     JabRef Bibsonomy Plug-in - Plugin for the reference management 
+    		software JabRef (http://jabref.sourceforge.net/) 
+    		to fetch, store and delete entries from BibSonomy.
+      
+     Copyright (C) 2008 - 2011 Knowledge & Data Engineering Group, 
+                               University of Kassel, Germany
+                               http://www.kde.cs.uni-kassel.de/
+     
+     This program is free software; you can redistribute it and/or
+     modify it under the terms of the GNU General Public License
+     as published by the Free Software Foundation; either version 2
+     of the License, or (at your option) any later version.
+    
+     This program is distributed in the hope that it will be useful,
+     but WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     GNU General Public License for more details.
+     
+     You should have received a copy of the GNU General Public License
+     along with this program; if not, write to the Free Software
+     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+-->
+
+<project name="BibSonomy Jabref Plugin">
+	<bannerLeft>
+		<name>UniKassel</name>
+		<src>images/unilogo_klein.png</src>
+		<href>http://www.uni-kassel.de/</href>
+	</bannerLeft>
+	<bannerRight>
+		<name>Knowledge and Data Engineering Group</name>
+		<src>images/KDE_web.gif</src>
+		<href>http://www.kde.cs.uni-kassel.de/</href>
+	</bannerRight>
+	<publishDate format="yyyy-MM-dd" />
+
+  	<skin>
+	    <groupId>org.bibsonomy.maven.skins</groupId>
+    	<artifactId>bibsonomy-skin</artifactId>
+    	<version>1.0</version>
+  	</skin>
+
+	<body>
+		<links>
+			<item name="Bibsonomy"
+				href="http://www.bibsonomy.org/" />
+			<item name="JabRef"
+				href="http://jabref.sourceforge.net/" />	
+			<item name="Knowledge and Data Engineering Group"
+				href="http://www.kde.cs.uni-kassel.de/" />
+		</links>
+		<menu name="JabRef Plugin">
+			<item name="Home"  href="/index.html" />
+			<item name="Download" href="/download.html" />
+			<item name="Support" href="/support.html" />
+			<item name="FAQ" href="/faq.html" />
+			<item name="History" href="/changes-report.html" />
+			<item name="License" href="/license.html" />			
+		</menu>
+		<menu name="Usage">
+			<item name="Installation" title="Installation" href="/installation.html" />
+			<item name="Running JabRef" href="/running.html" />
+			<item name="Configuration" href="/config.html" />
+			<item name="Fetching entries" href="/fetch.html" />
+			<item name="Exporting to Bibsonomy" href="/export.html" />
+			<item name="Deleting entries" href="/delete.html" />
+			<item name="Synchronize" href="/synchronize.html" />
+			<item name="Private documents" href="/documents.html" />
+			<item name="Proxy settings" href="/proxy.html" />
+		</menu>
+		<!-- project reports -->
+		<menu ref="reports"/>
+	</body>
+</project>

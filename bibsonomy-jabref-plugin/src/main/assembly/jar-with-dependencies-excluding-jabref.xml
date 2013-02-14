@@ -1,0 +1,70 @@
+<!--
+
+     
+     JabRef Bibsonomy Plug-in - Plugin for the reference management 
+    		software JabRef (http://jabref.sourceforge.net/) 
+    		to fetch, store and delete entries from BibSonomy.
+      
+     Copyright (C) 2008 - 2011 Knowledge & Data Engineering Group, 
+                               University of Kassel, Germany
+                               http://www.kde.cs.uni-kassel.de/
+     
+     This program is free software; you can redistribute it and/or
+     modify it under the terms of the GNU General Public License
+     as published by the Free Software Foundation; either version 2
+     of the License, or (at your option) any later version.
+    
+     This program is distributed in the hope that it will be useful,
+     but WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     GNU General Public License for more details.
+     
+     You should have received a copy of the GNU General Public License
+     along with this program; if not, write to the Free Software
+     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+-->
+
+<!--
+	Build jar file with all project binaries and 
+	all dependencies.
+	
+	Format is documented here:
+	http://maven.apache.org/plugins/maven-assembly-plugin/assembly.html
+	
+	This a modified version of the assembly 'jar-with-dependencies':
+	http://maven.apache.org/plugins/maven-assembly-plugin/descriptor-refs.html#jar-with-dependencies
+	
+	Version: $Id: jar-with-dependencies-excluding-jabref.xml,v 1.4 2011-02-08 16:15:52 boogie Exp $ 
+ -->
+<assembly>
+  <id>bin</id>
+  <formats>
+    <format>jar</format>
+  </formats>
+  <includeBaseDirectory>false</includeBaseDirectory>
+  <dependencySets>
+    <dependencySet>
+      <outputDirectory></outputDirectory>
+      <outputFileNameMapping></outputFileNameMapping>
+      <unpack>true</unpack>
+      <scope>runtime</scope>
+      <!-- exclude jabref dependency -->
+      <excludes>
+        <exclude>jabref:jabref</exclude>
+        <exclude>JabRef:JabRef</exclude>
+        <exclude>junit:*</exclude>
+        <exclude>org.springframework:*</exclude>
+        <exclude>org.mockejb:*</exclude>
+        <exclude>javax:*</exclude>
+        <exclude>antlr:*</exclude>
+      </excludes>      
+    </dependencySet>
+  </dependencySets>
+  <fileSets>
+    <fileSet>
+      <directory>target/classes</directory>
+      <outputDirectory></outputDirectory>
+    </fileSet>
+  </fileSets>
+</assembly>

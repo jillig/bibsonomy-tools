@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!--
+
+     
+     JabRef Bibsonomy Plug-in - Plugin for the reference management 
+    		software JabRef (http://jabref.sourceforge.net/) 
+    		to fetch, store and delete entries from BibSonomy.
+      
+     Copyright (C) 2008 - 2011 Knowledge & Data Engineering Group, 
+                               University of Kassel, Germany
+                               http://www.kde.cs.uni-kassel.de/
+     
+     This program is free software; you can redistribute it and/or
+     modify it under the terms of the GNU General Public License
+     as published by the Free Software Foundation; either version 2
+     of the License, or (at your option) any later version.
+    
+     This program is distributed in the hope that it will be useful,
+     but WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     GNU General Public License for more details.
+     
+     You should have received a copy of the GNU General Public License
+     along with this program; if not, write to the Free Software
+     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+-->
+
+<!DOCTYPE plugin PUBLIC "-//JPF//Java Plug-in Manifest 1.0" "http://jpf.sourceforge.net/plugin_1_0.dtd">
+<plugin id="org.bibsonomy.plugin.jabref" version="2.5.2">
+
+	<requires>
+		<import plugin-id="net.sf.jabref.core"/>
+	</requires>
+
+	<runtime>
+		<library type="code" path="./" id="code"/>
+    </runtime>
+
+	<extension id="PublicationSharingSidePanePlugin" plugin-id="net.sf.jabref.core" point-id="SidePanePlugin">
+        <parameter id="sidePanePlugin" value="org.bibsonomy.plugin.jabref.PublicationSharingSidePanePlugin"/>
+        <parameter id="name" value="BibSonomy"/>
+        <parameter id="description" value="BibSonomy"/>
+    </extension>
+</plugin>
