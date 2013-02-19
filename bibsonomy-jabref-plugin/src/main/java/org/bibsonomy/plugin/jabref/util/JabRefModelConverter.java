@@ -174,6 +174,10 @@ public class JabRefModelConverter {
 		// parse the misc fields and loop over them
 		bibtex.parseMiscField();
 
+		/*
+		 * FIXME: if the misc field erroneously contains the intrahash, it is 
+		 * overwriting the correct one, which is set above!
+		 */
 		if (bibtex.getMiscFields() != null)
 		    for (final String key : bibtex.getMiscFields().keySet()) {
 			if ("id".equals(key)) {
