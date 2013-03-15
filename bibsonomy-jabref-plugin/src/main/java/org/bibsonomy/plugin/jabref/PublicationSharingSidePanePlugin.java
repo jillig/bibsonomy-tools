@@ -81,12 +81,14 @@ public class PublicationSharingSidePanePlugin implements SidePanePlugin {
 		
 		// create a ChangeListener to react on newly added entries.
 		PluginDataBaseChangeListener l = new PluginDataBaseChangeListener(jabRefFrame);
-		// if JabRef has a basePanel just append the DatabaseChangeListener to the Database
-		if(jabRefFrame.basePanel() != null && jabRefFrame.basePanel().database() != null)
-			jabRefFrame.basePanel().database().addDatabaseChangeListener(l);
 		
-		// otherwise set it at the ChangeListener of the Tabbed Pane 
+		// set a ChangeListener of the Tabbed Pane which registers the databasechangelistener to all database tabs that are added later 
 		jabRefFrame.getTabbedPane().addChangeListener(new TabbedPaneChangeListener(l));
+		// ...but maybe we were too late: Tabs are created by another (swing)thread so the initial tab change event after tab(and database) creation may be over already.
+		// Therefore add the listener to the database of the current tab if it is already present. 
+		if (jabRefFrame.basePanel() != null && jabRefFrame.basePanel().database() != null) {
+			jabRefFrame.basePanel().database().addDatabaseChangeListener(l);
+		}
 		
 		this.sidePaneComponent = new PluginSidePaneComponent(manager, jabRefFrame);
 		PluginToolBarExtender.extend(jabRefFrame, sidePaneComponent);

@@ -32,14 +32,13 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+import net.sf.jabref.BibtexEntry;
+import net.sf.jabref.JabRefFrame;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.bibsonomy.plugin.jabref.util.CheckTagsUtil;
-import org.bibsonomy.plugin.jabref.util.JabRefModelConverter;
 import org.bibsonomy.plugin.jabref.worker.ExportWorker;
-
-import net.sf.jabref.BibtexEntry;
-import net.sf.jabref.JabRefFrame;
 
 /**
  * {@link ExportSelectedEntriesAction} checks for entries without keywords and does 

@@ -44,6 +44,8 @@ public class StringUtil {
 	public static String toUTF8(String s) {
 		if(s != null) {
 			try {
+				// FIXME: what is this? why do we want to introduce platform dependency here?
+				// This should only be correct if an error from somewhere else has to be corrected.
 				return new String(s.getBytes("UTF8"));
 			} catch (UnsupportedEncodingException e) {}
 		}

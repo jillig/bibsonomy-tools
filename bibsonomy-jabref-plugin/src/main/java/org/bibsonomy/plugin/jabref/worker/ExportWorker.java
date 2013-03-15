@@ -25,6 +25,7 @@
 
 package org.bibsonomy.plugin.jabref.worker;
 
+import java.util.Collections;
 import java.util.List;
 
 import net.sf.jabref.BibtexEntry;
@@ -33,6 +34,8 @@ import net.sf.jabref.JabRefFrame;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.bibsonomy.common.enums.GroupingEntity;
+import org.bibsonomy.common.enums.PostUpdateOperation;
+import org.bibsonomy.model.BibTex;
 import org.bibsonomy.model.Post;
 import org.bibsonomy.model.Resource;
 import org.bibsonomy.model.User;
@@ -40,111 +43,98 @@ import org.bibsonomy.plugin.jabref.PluginProperties;
 import org.bibsonomy.plugin.jabref.action.ShowSettingsDialogAction;
 import org.bibsonomy.plugin.jabref.util.JabRefModelConverter;
 import org.bibsonomy.plugin.jabref.util.WorkerUtil;
-import org.bibsonomy.rest.client.Bibsonomy;
-import org.bibsonomy.rest.client.queries.post.CreatePostQuery;
-
-import org.bibsonomy.rest.client.queries.put.ChangePostQuery;
 import org.bibsonomy.rest.exceptions.AuthenticationException;
 
 /**
  * Export an entry to service
+ * 
  * @author Waldemar Biller <biller@cs.uni-kassel.de>
- *
+ * 
  */
 public class ExportWorker extends AbstractPluginWorker {
 
 	private static final Log LOG = LogFactory.getLog(ExportWorker.class);
-	
+
 	private JabRefFrame jabRefFrame;
+
 	private List<BibtexEntry> entries;
 
 	public void run() {
-		Bibsonomy client = new Bibsonomy(PluginProperties.getUsername(), PluginProperties.getApiKey());
-		client.setApiURL(PluginProperties.getApiUrl());
-		
 		try {
-			
-			for(BibtexEntry entry : entries) {
-				
+			for (BibtexEntry entry : entries) {
 				String intrahash = entry.getField("intrahash");
 				jabRefFrame.output("Exporting post " + entry.getCiteKey());
-				
-				if(entry.getField("groups") != null) {
-					
-					// check grouping. replace public with private if user set default visibility to private and vice versa
-					if(entry.getField("groups").contains("private") && PluginProperties.getDefaultVisibilty() == GroupingEntity.ALL)
+
+				if (entry.getField("groups") != null) {
+					// check grouping. replace public with private if user set
+					// default visibility to private and vice versa
+					if (entry.getField("groups").contains("private") && PluginProperties.getDefaultVisibilty() == GroupingEntity.ALL) {
 						entry.setField("groups", entry.getField("groups").replaceAll("private", "public"));
-						
-					if(entry.getField("groups").contains("public") && PluginProperties.getDefaultVisibilty() == GroupingEntity.USER)
+					}
+					if (entry.getField("groups").contains("public") && PluginProperties.getDefaultVisibilty() == GroupingEntity.USER) {
 						entry.setField("groups", entry.getField("groups").replaceAll("public", "private"));
-				}
-				
-				// add private or public if groups is empty
-				if(entry.getField("groups") == null || "".equals(entry.getField("groups"))) {
-					switch(PluginProperties.getDefaultVisibilty()) {
-						case USER:
-							entry.setField("groups", "private");
-							break;
-						default:
-							entry.setField("groups", "public");
 					}
 				}
-				
+
+				// add private or public if groups is empty
+				if (entry.getField("groups") == null || "".equals(entry.getField("groups"))) {
+					switch (PluginProperties.getDefaultVisibilty()) {
+					case USER:
+						entry.setField("groups", "private");
+						break;
+					default:
+						entry.setField("groups", "public");
+					}
+				}
+
 				entry.setField("username", PluginProperties.getUsername());
 				String owner = entry.getField("owner");
 				entry.clearField("owner");
-				
-				if(intrahash != null && !"".equals(intrahash))
-					changePost(client, entry);
-				else createPost(client, entry);
-				
+
+				Post<BibTex> post = JabRefModelConverter.convertEntry(entry);
+				if (post.getUser() == null) {
+					post.setUser(new User(PluginProperties.getUsername()));
+				}
+
+				if (intrahash != null && !"".equals(intrahash)) {
+					changePost(post);
+				} else {
+					createPost(post);
+					entry.setField("intrahash", post.getResource().getIntraHash());
+				}
+
 				entry.setField("owner", owner);
-				
+
 				String files = entry.getField("file");
-				if(files != null && !"".equals(files))
+				if (files != null && !"".equals(files)) {
 					WorkerUtil.performAsynchronously(new UploadDocumentsWorker(jabRefFrame, entry.getField("intrahash"), files));
+				}
 			}
-			
-		} catch(AuthenticationException ex) {
-			
+			jabRefFrame.output("Done.");
+			return;
+		} catch (AuthenticationException ex) {
 			(new ShowSettingsDialogAction(jabRefFrame)).actionPerformed(null);
-		} catch(Exception ex) {
-			
+		} catch (Exception ex) {
 			LOG.error("Failed to export post ", ex);
 		} catch (Throwable ex) {
-			
 			LOG.error("Failed to export post ", ex);
 		}
-		jabRefFrame.output("Done.");
+		jabRefFrame.output("Failed.");
 	}
-	
-	private void changePost(Bibsonomy client, BibtexEntry entry) throws Exception {
-		
-		Post<? extends Resource> post = JabRefModelConverter.convertEntry(entry);
-		
-		if(post.getUser() == null)
-			post.setUser(new User(PluginProperties.getUsername()));
-		
-		ChangePostQuery changePostQuery = new ChangePostQuery(PluginProperties.getUsername(), post.getResource().getIntraHash(), post);
-		
-		client.executeQuery(changePostQuery);
+
+	private void changePost(Post<? extends Resource> post) throws Exception {
+		getLogic().updatePosts(Collections.<Post<? extends Resource>> singletonList(post), PostUpdateOperation.UPDATE_ALL);
 	}
-	
-	private void createPost(Bibsonomy client, BibtexEntry entry) throws Exception {
-		
-		Post<? extends Resource> post = JabRefModelConverter.convertEntry(entry);
-		
-		if(post.getUser() == null)
-			post.setUser(new User(PluginProperties.getUsername()));
-		
-		CreatePostQuery createPostQuery = new CreatePostQuery(PluginProperties.getUsername(), post);
-		client.executeQuery(createPostQuery);
-		
-		entry.setField("intrahash", createPostQuery.getResult());
+
+	private void createPost(Post<? extends Resource> post) throws Exception {
+		final List<String> hashes = getLogic().createPosts(Collections.<Post<? extends Resource>> singletonList(post));
+		if (hashes.size() != 1) {
+			throw new IllegalStateException("createPosts returned " + hashes.size() + " hashes");
+		}
+		post.getResource().setIntraHash(hashes.get(0));
 	}
 
 	public ExportWorker(JabRefFrame jabRefFrame, List<BibtexEntry> entries) {
-		
 		this.jabRefFrame = jabRefFrame;
 		this.entries = entries;
 	}

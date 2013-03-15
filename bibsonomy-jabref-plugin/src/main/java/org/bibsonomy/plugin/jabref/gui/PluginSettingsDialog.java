@@ -69,6 +69,8 @@ public class PluginSettingsDialog extends JDialog {
 	private JTabbedPane settingsPane = null;
 	private JPanel generalSettingsPanel = null;
 	private JPanel credentialsPanel = null;
+	private JLabel apiUrlLabel = null;
+	private JTextField apiUrlTextField = null;
 	private JLabel userNameLabel = null;
 	private JTextField usernameTextField = null;
 	private JLabel apiKeyLabel = null;
@@ -80,7 +82,7 @@ public class PluginSettingsDialog extends JDialog {
 	private JCheckBox uploadDocumentsCheckBox = null;
 	private JCheckBox downloadDocumentsCheckBox = null;
 	private JLabel defaultVisibilityLabel = null;
-	private JComboBox defaultVisibilityComboBox = null;
+	private JComboBox<GroupingComboBoxItem> defaultVisibilityComboBox = null;
 	private JLabel extraFieldsLabel = null;
 	private JTextField extraFieldsTextField = null;
 	private JLabel extraFieldsHintLabel = null;
@@ -91,7 +93,7 @@ public class PluginSettingsDialog extends JDialog {
 	private JLabel tagSizeLabel = null;
 	private JSpinner tagCloudSizeSpinner = null;
 	private JLabel tagCloudOrderLabel = null;
-	private JComboBox tagCloudOrderComboBox = null;
+	private JComboBox<?> tagCloudOrderComboBox = null;
 	private JLabel tagCloudOrderHintLabel = null;
 	private JLabel changingCredentialsHintLabel = null;
 	/**
@@ -178,7 +180,7 @@ public class PluginSettingsDialog extends JDialog {
 	 */
 	private JButton getSaveButton() {
 		if (saveButton == null) {
-			saveButton = new JButton(new ClosePluginSettingsDialogBySaveAction(this, getUsernameTextField(), getApiKeyTextField(), getStoreAPIKeyCheckBox(), getNumberOfPostsSpinner(), getTagCloudSizeSpinner(), getIgnoreOneTagWarningCheckBox(), getUpdateTagsCheckBox(), getUploadDocumentsCheckBox(), getDownloadDocumentsCheckBox(), getDefaultVisibilityComboBox(), getNoWarningOnMorePostsCheckBox(), getExtraFieldsTextField(), getTagCloudOrderComboBox()));
+			saveButton = new JButton(new ClosePluginSettingsDialogBySaveAction(this, getApiUrlTextField(), getUsernameTextField(), getApiKeyTextField(), getStoreAPIKeyCheckBox(), getNumberOfPostsSpinner(), getTagCloudSizeSpinner(), getIgnoreOneTagWarningCheckBox(), getUpdateTagsCheckBox(), getUploadDocumentsCheckBox(), getDownloadDocumentsCheckBox(), getDefaultVisibilityComboBox(), getNoWarningOnMorePostsCheckBox(), getExtraFieldsTextField(), getTagCloudOrderComboBox()));
 		}
 		return saveButton;
 	}
@@ -380,6 +382,8 @@ public class PluginSettingsDialog extends JDialog {
 			apiKeyLabel.setText("API key");
 			userNameLabel = new JLabel();
 			userNameLabel.setText("Username");
+			apiUrlLabel = new JLabel();
+			apiUrlLabel.setText("Application URL");
 			GridBagConstraints gridBagConstraints2 = new GridBagConstraints();
 			gridBagConstraints2.gridx = 1;
 			gridBagConstraints2.fill = GridBagConstraints.HORIZONTAL;
@@ -419,75 +423,62 @@ public class PluginSettingsDialog extends JDialog {
 	 * @return javax.swing.JPanel	
 	 */
 	private JPanel getCredentialsPanel() {
-		if (credentialsPanel == null) {
-			GridBagConstraints gridBagConstraints28 = new GridBagConstraints();
-			gridBagConstraints28.gridx = 1;
-			gridBagConstraints28.anchor = GridBagConstraints.WEST;
-			gridBagConstraints28.insets = new Insets(0, 0, 3, 0);
-			gridBagConstraints28.gridy = 4;
-			changingCredentialsHintLabel = new JLabel();
-			changingCredentialsHintLabel.setText("Don't forget to hit the refresh button after changing credentials!");
-			changingCredentialsHintLabel.setFont(new Font("Dialog", Font.ITALIC, 10));
-			GridBagConstraints gridBagConstraints8 = new GridBagConstraints();
-			gridBagConstraints8.anchor = GridBagConstraints.WEST;
-			gridBagConstraints8.gridy = 3;
-			gridBagConstraints8.insets = new Insets(0, 0, 3, 0);
-			gridBagConstraints8.gridx = 1;
-			GridBagConstraints gridBagConstraints7 = new GridBagConstraints();
-			gridBagConstraints7.anchor = GridBagConstraints.WEST;
-			gridBagConstraints7.insets = new Insets(0, 0, 3, 0);
-			gridBagConstraints7.gridx = 1;
-			gridBagConstraints7.gridy = 2;
-			gridBagConstraints7.fill = GridBagConstraints.HORIZONTAL;
-			GridBagConstraints gridBagConstraints6 = new GridBagConstraints();
-			gridBagConstraints6.fill = GridBagConstraints.BOTH;
-			gridBagConstraints6.gridx = 1;
-			gridBagConstraints6.gridy = 1;
-			gridBagConstraints6.ipadx = 2;
-			gridBagConstraints6.ipady = 2;
-			gridBagConstraints6.weightx = 1.0;
-			gridBagConstraints6.insets = new Insets(0, 0, 3, 0);
-			GridBagConstraints gridBagConstraints5 = new GridBagConstraints();
-			gridBagConstraints5.anchor = GridBagConstraints.WEST;
-			gridBagConstraints5.insets = new Insets(0, 0, 3, 3);
-			gridBagConstraints5.gridx = 0;
-			gridBagConstraints5.gridy = 1;
-			gridBagConstraints5.weightx = 0.1;
-			gridBagConstraints5.fill = GridBagConstraints.HORIZONTAL;
-			GridBagConstraints gridBagConstraints4 = new GridBagConstraints();
-			gridBagConstraints4.fill = GridBagConstraints.BOTH;
-			gridBagConstraints4.gridx = 1;
-			gridBagConstraints4.gridy = 0;
-			gridBagConstraints4.ipadx = 2;
-			gridBagConstraints4.ipady = 2;
-			gridBagConstraints4.weightx = 1.0;
-			gridBagConstraints4.insets = new Insets(0, 0, 3, 0);
-			GridBagConstraints gridBagConstraints3 = new GridBagConstraints();
-			gridBagConstraints3.anchor = GridBagConstraints.WEST;
-			gridBagConstraints3.insets = new Insets(0, 0, 3, 3);
-			gridBagConstraints3.gridx = -1;
-			gridBagConstraints3.gridy = -1;
-			gridBagConstraints3.weightx = 0.1;
-			gridBagConstraints3.fill = GridBagConstraints.HORIZONTAL;
-			credentialsPanel = new JPanel();
-			credentialsPanel.setLayout(new GridBagLayout());
-			credentialsPanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder(null, "Credentials", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Dialog", Font.BOLD, 12), new Color(51, 51, 51)), BorderFactory.createEmptyBorder(3, 3, 3, 3)));
-			credentialsPanel.add(userNameLabel, gridBagConstraints3);
-			credentialsPanel.add(getUsernameTextField(), gridBagConstraints4);
-			credentialsPanel.add(apiKeyLabel, gridBagConstraints5);
-			credentialsPanel.add(getApiKeyTextField(), gridBagConstraints6);
-			credentialsPanel.add(getStoreAPIKeyCheckBox(), gridBagConstraints7);
-			credentialsPanel.add(apiKeyHintLabel, gridBagConstraints8);
-			credentialsPanel.add(changingCredentialsHintLabel, gridBagConstraints28);
+		if (credentialsPanel != null) {
+			return credentialsPanel;
 		}
+		
+		credentialsPanel = new JPanel();
+		credentialsPanel.setLayout(new GridBagLayout());
+		credentialsPanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder(null, "Credentials", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Dialog", Font.BOLD, 12), new Color(51, 51, 51)), BorderFactory.createEmptyBorder(3, 3, 3, 3)));
+		
+		final GridBagConstraints leftConstr = new GridBagConstraints();
+		leftConstr.anchor = GridBagConstraints.WEST;
+		leftConstr.insets = new Insets(0, 0, 3, 3);
+		leftConstr.gridx = 0;
+		leftConstr.gridy = 0;
+		leftConstr.weightx = 0.1;
+		//leftConstr.fill = GridBagConstraints.HORIZONTAL;
+		
+		final GridBagConstraints rightConstr = new GridBagConstraints();
+		rightConstr.anchor = GridBagConstraints.WEST;
+		rightConstr.ipadx = 2;
+		rightConstr.ipady = 2;
+		rightConstr.gridx = 1;
+		rightConstr.gridy = 0;
+		rightConstr.weightx = 0.9;
+		rightConstr.fill = GridBagConstraints.HORIZONTAL;
+		
+		credentialsPanel.add(apiUrlLabel, leftConstr);
+		credentialsPanel.add(getApiUrlTextField(), rightConstr);
+		leftConstr.gridy++;
+		rightConstr.gridy++;
+		
+		credentialsPanel.add(userNameLabel, leftConstr);
+		credentialsPanel.add(getUsernameTextField(), rightConstr);
+		leftConstr.gridy++;
+		rightConstr.gridy++;
+		
+		credentialsPanel.add(apiKeyLabel, leftConstr);
+		credentialsPanel.add(getApiKeyTextField(), rightConstr);
+		leftConstr.gridy++;
+		rightConstr.gridy++;
+		
+		rightConstr.ipadx = 0;
+		rightConstr.ipady = 0;
+		credentialsPanel.add(getStoreAPIKeyCheckBox(), rightConstr);
+		rightConstr.gridy++;
+		
+		credentialsPanel.add(apiKeyHintLabel, rightConstr);
+		rightConstr.gridy++;
+		
+		changingCredentialsHintLabel = new JLabel();
+		changingCredentialsHintLabel.setText("Don't forget to hit the refresh button after changing credentials!");
+		changingCredentialsHintLabel.setFont(new Font("Dialog", Font.ITALIC, 10));
+		credentialsPanel.add(changingCredentialsHintLabel, rightConstr);
+			
 		return credentialsPanel;
 	}
 
-	/**
-	 * This method initializes usernameTextField	
-	 * 	
-	 * @return javax.swing.JTextField	
-	 */
 	private JTextField getUsernameTextField() {
 		if (usernameTextField == null) {
 			usernameTextField = new JTextField(PluginProperties.getUsername());
@@ -505,6 +496,19 @@ public class PluginSettingsDialog extends JDialog {
 			apiKeyTextField = new JTextField(PluginProperties.getApiKey());
 		}
 		return apiKeyTextField;
+	}
+	
+
+	/**
+	 * This method initializes apiUrlTextField	
+	 * 	
+	 * @return javax.swing.JTextField	
+	 */
+	private JTextField getApiUrlTextField() {
+		if (apiUrlTextField == null) {
+			apiUrlTextField = new JTextField(PluginProperties.getApiUrl());
+		}
+		return apiUrlTextField;
 	}
 
 	/**
@@ -582,14 +586,14 @@ public class PluginSettingsDialog extends JDialog {
 	 * 	
 	 * @return javax.swing.JComboBox	
 	 */
-	private JComboBox getDefaultVisibilityComboBox() {
+	private JComboBox<GroupingComboBoxItem> getDefaultVisibilityComboBox() {
 		if (defaultVisibilityComboBox == null) {
 			List<GroupingComboBoxItem> items = new LinkedList<GroupingComboBoxItem>();
 			
 			items.add(new GroupingComboBoxItem(GroupingEntity.ALL, "Public"));
 			items.add(new GroupingComboBoxItem(GroupingEntity.USER, "Private"));
 			
-			defaultVisibilityComboBox = new JComboBox();
+			defaultVisibilityComboBox = new JComboBox<GroupingComboBoxItem>();
 			
 			for(GroupingComboBoxItem item : items)
 				defaultVisibilityComboBox.addItem(item);
@@ -670,7 +674,7 @@ public class PluginSettingsDialog extends JDialog {
 	 * 	
 	 * @return javax.swing.JComboBox	
 	 */
-	private JComboBox getTagCloudOrderComboBox() {
+	private JComboBox<?> getTagCloudOrderComboBox() {
 		if (tagCloudOrderComboBox == null) {
 			
 			OrderComboBoxItem[] items = new OrderComboBoxItem[] {
@@ -681,7 +685,7 @@ public class PluginSettingsDialog extends JDialog {
 				new OrderComboBoxItem(Order.ADDED, "Date")
 			};
 			
-			tagCloudOrderComboBox = new JComboBox(items);
+			tagCloudOrderComboBox = new JComboBox<Object>(items);
 			
 			int itemCount = tagCloudOrderComboBox.getItemCount();
 			for(int i = 0; i < itemCount; i++) {

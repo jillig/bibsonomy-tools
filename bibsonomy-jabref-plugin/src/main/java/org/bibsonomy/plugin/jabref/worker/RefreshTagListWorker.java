@@ -35,17 +35,11 @@ import net.sf.jabref.Globals;
 import net.sf.jabref.JabRefFrame;
 import net.sf.jabref.MetaData;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.bibsonomy.common.enums.GroupingEntity;
-import org.bibsonomy.common.enums.ResourceType;
+import org.bibsonomy.model.BibTex;
 import org.bibsonomy.model.Tag;
 import org.bibsonomy.plugin.jabref.PluginProperties;
-import org.bibsonomy.plugin.jabref.action.ShowSettingsDialogAction;
-import org.bibsonomy.rest.client.Bibsonomy;
-import org.bibsonomy.rest.client.queries.get.GetTagsQuery;
-import org.bibsonomy.rest.exceptions.AuthenticationException;
-import org.bibsonomy.rest.exceptions.BadRequestOrResponseException;
+
 
 /**
  * Fetch tags from the service and display them in a tag cloud
@@ -54,7 +48,7 @@ import org.bibsonomy.rest.exceptions.BadRequestOrResponseException;
  */
 public class RefreshTagListWorker extends AbstractPluginWorker {
 
-	private static final Log LOG = LogFactory.getLog(RefreshTagListWorker.class);
+//	private static final Log LOG = LogFactory.getLog(RefreshTagListWorker.class);
 
 	private JEditorPane tagCloud;
 	
@@ -74,9 +68,6 @@ public class RefreshTagListWorker extends AbstractPluginWorker {
 	
 	public void run() {
 		
-		Bibsonomy client = new Bibsonomy(PluginProperties.getUsername(), PluginProperties.getApiKey());
-		client.setApiURL(PluginProperties.getApiUrl());
-		
 		MetaData metaData = null;
 		Vector<String> keywords = null;
 		if(jabRefFrame.basePanel() != null) {
@@ -90,25 +81,8 @@ public class RefreshTagListWorker extends AbstractPluginWorker {
 		if(grouping == GroupingEntity.ALL && PluginProperties.getTagCloudSize() > 100)
 			end = 100;
 		
-		GetTagsQuery getTagsQuery = new GetTagsQuery(start, end);
-		getTagsQuery.setResourceType(ResourceType.BIBTEX);
-		getTagsQuery.setGrouping(grouping, groupingValue);
-		getTagsQuery.setOrder(PluginProperties.getTagCloudOrder());
-		
-		List<Tag> result = null;
-		try {
-
-			client.executeQuery(getTagsQuery);
-			result = getTagsQuery.getResult();
-			tags.addAll(result);
-			
-		} catch(AuthenticationException ex) {
-			(new ShowSettingsDialogAction(jabRefFrame)).actionPerformed(null);
-		} catch(BadRequestOrResponseException ex) {
-			LOG.error("Reached maximum number of tags", ex);
-		} catch(Exception ex) {
-			LOG.error("Error updating tags", ex);
-		}
+		final List<Tag> result = getLogic().getTags(BibTex.class, grouping, groupingValue, null, null, null, null, null, PluginProperties.getTagCloudOrder(), null, null, start, end);
+		tags.addAll(result);
 		
 		for(Tag tag : tags) {
 			
@@ -122,6 +96,9 @@ public class RefreshTagListWorker extends AbstractPluginWorker {
 					max = Math.max(max, tag.getGlobalcount());
 					min = Math.min(min, tag.getGlobalcount());
 			}
+		}
+		if (max == min) {
+			max++;
 		}
 		
 		StringBuffer tagList = new StringBuffer();

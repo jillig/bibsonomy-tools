@@ -50,7 +50,7 @@ public class PluginHyperLinkListener  extends AbstractPluginAction implements Hy
 
 	private static final long serialVersionUID = -2030390936610286041L;
 
-	private JComboBox visibilityComboBox;
+	private JComboBox<?> visibilityComboBox;
 
 	public void hyperlinkUpdate(HyperlinkEvent e) {
 		
@@ -67,7 +67,7 @@ public class PluginHyperLinkListener  extends AbstractPluginAction implements Hy
 		}
 	}
 	
-	public PluginHyperLinkListener(JabRefFrame jabRefFrame, JComboBox visibilityComboBox) {
+	public PluginHyperLinkListener(JabRefFrame jabRefFrame, JComboBox<?> visibilityComboBox) {
 		
 		super(jabRefFrame, null, null);
 		this.visibilityComboBox = visibilityComboBox;

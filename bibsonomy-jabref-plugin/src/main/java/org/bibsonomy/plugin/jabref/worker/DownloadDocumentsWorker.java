@@ -29,19 +29,15 @@ import java.net.URLEncoder;
 
 import net.sf.jabref.BibtexEntry;
 import net.sf.jabref.JabRefFrame;
-import net.sf.jabref.JabRefPreferences;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.bibsonomy.model.BibTex;
 import org.bibsonomy.model.Document;
 import org.bibsonomy.model.Post;
+import org.bibsonomy.model.Resource;
 import org.bibsonomy.plugin.jabref.PluginProperties;
 import org.bibsonomy.plugin.jabref.action.ShowSettingsDialogAction;
-import org.bibsonomy.rest.client.Bibsonomy;
-
-import org.bibsonomy.rest.client.queries.get.GetPostDetailsQuery;
-import org.bibsonomy.rest.client.queries.get.GetPostDocumentQuery;
 import org.bibsonomy.rest.exceptions.AuthenticationException;
 import org.bibsonomy.util.file.FileUtil;
 
@@ -58,7 +54,7 @@ public class DownloadDocumentsWorker extends AbstractPluginWorker {
 	
 	private static final String BIBTEX_FILE_FIELD = "file";
 	
-	private static final String DEFAULT_FILE_DIRECTORY = System.getProperty("user.dir");
+	
 	private BibtexEntry entry;
 	private JabRefFrame jabRefFrame;
 	private boolean isImport;
@@ -72,41 +68,34 @@ public class DownloadDocumentsWorker extends AbstractPluginWorker {
 
 	public void run() {
 		
-		if(isImport && !PluginProperties.getDownloadDocumentsOnImport())
+		if (isImport && !PluginProperties.getDownloadDocumentsOnImport()) {
 			return;
-		
-		Bibsonomy client = new Bibsonomy(PluginProperties.getUsername(), PluginProperties.getApiKey());
-		client.setApiURL(PluginProperties.getApiUrl());
+		}
+
 		
 		String intrahash = entry.getField("intrahash");
-		if(intrahash != null && !"".equals(intrahash)) {
-			
-			GetPostDetailsQuery getPostDetailsQuery = new GetPostDetailsQuery(PluginProperties.getUsername(), intrahash);
-			
+		if (intrahash != null && !"".equals(intrahash)) {
+			final Post<? extends Resource> post;
 			try {
-				client.executeQuery(getPostDetailsQuery);
+				post = getLogic().getPostDetails(intrahash, PluginProperties.getUsername()); // client.executeQuery(getPostDetailsQuery);
 			} catch (AuthenticationException e) {
 				(new ShowSettingsDialogAction(jabRefFrame)).actionPerformed(null);
+				return;
 			} catch (Exception e) {
 				LOG.error("Failed getting details for post " + intrahash, e);
+				jabRefFrame.output("Failed getting details for post.");
+				return;
 			}
-			
-			@SuppressWarnings("unchecked")
-			Post<BibTex> post = (Post<BibTex>) getPostDetailsQuery.getResult();
-			
-			for(Document document : post.getResource().getDocuments()) {
-				
+			Resource r = post.getResource();
+			if (!(r instanceof BibTex)) {
+				LOG.warn("requested resource with intrahash '" + intrahash + "' is not bibtex");
+				jabRefFrame.output("Error: Invalid Resourcetype.");
+				return;
+			}
+			for (Document document : ((BibTex) r).getDocuments()) {
 				jabRefFrame.output("Downloading: " + document.getFileName());
-				GetPostDocumentQuery getPostDocumentQuery = null;
 				try {
-					getPostDocumentQuery = new GetPostDocumentQuery(
-							PluginProperties.getUsername(), intrahash, 
-							URLEncoder.encode(document.getFileName(), "UTF-8"), 
-							JabRefPreferences.getInstance().get("fileDirectory", DEFAULT_FILE_DIRECTORY), 
-							JabRefPreferences.getInstance().get("pdfDirectory", DEFAULT_FILE_DIRECTORY), 
-							JabRefPreferences.getInstance().get("psDirectory", DEFAULT_FILE_DIRECTORY));
-					
-					client.executeQuery(getPostDocumentQuery);
+					getLogic().getDocument(PluginProperties.getUsername(), intrahash, URLEncoder.encode(document.getFileName(), "UTF-8"));
 				} catch (Exception ex) {
 					LOG.error("Failed downloading file: " + document.getFileName(), ex);
 				}

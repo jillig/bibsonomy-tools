@@ -37,66 +37,56 @@ import org.bibsonomy.model.User;
 import org.bibsonomy.plugin.jabref.PluginProperties;
 import org.bibsonomy.plugin.jabref.action.ShowSettingsDialogAction;
 import org.bibsonomy.plugin.jabref.gui.GroupingComboBoxItem;
-import org.bibsonomy.rest.client.Bibsonomy;
-import org.bibsonomy.rest.client.queries.get.GetUserDetailsQuery;
 import org.bibsonomy.rest.exceptions.AuthenticationException;
 
 /**
  * Fetch the users groups and add them to the "import posts from..." field
+ * 
  * @author Waldemar Biller <biller@cs.uni-kassel.de>
- *
+ * 
  */
 public class UpdateVisibilityWorker extends AbstractPluginWorker {
 
 	private static final Log LOG = LogFactory.getLog(UpdateVisibilityWorker.class);
-	
-	private JComboBox visibility;
+
+	private JComboBox<? super GroupingComboBoxItem> visibility;
+
 	private JabRefFrame jabRefFrame;
-	
-	public UpdateVisibilityWorker(JabRefFrame jabRefFrame, JComboBox visisbility) {
-		
+
+	public UpdateVisibilityWorker(JabRefFrame jabRefFrame, JComboBox<? super GroupingComboBoxItem> visisbility) {
+
 		this.jabRefFrame = jabRefFrame;
 		this.visibility = visisbility;
 	}
-	
+
 	public void run() {
-	
 		GroupingComboBoxItem item = (GroupingComboBoxItem) visibility.getSelectedItem();
-		
+
 		visibility.removeAllItems();
 		visibility.addItem(new GroupingComboBoxItem(GroupingEntity.ALL, "all users"));
 		visibility.addItem(new GroupingComboBoxItem(GroupingEntity.USER, PluginProperties.getUsername()));
-		
-		Bibsonomy client = new Bibsonomy(PluginProperties.getUsername(), PluginProperties.getApiKey());
-		client.setApiURL(PluginProperties.getApiUrl());
-		
+
 		try {
-			
-			GetUserDetailsQuery getUserDetailsQuery = new GetUserDetailsQuery(PluginProperties.getUsername());
-			client.executeQuery(getUserDetailsQuery);
-			
-			User user = getUserDetailsQuery.getResult();
-			
-			for(Group g : user.getGroups())
+			User user = getLogic().getUserDetails(PluginProperties.getUsername());
+
+			for (Group g : user.getGroups()) {
 				visibility.addItem(new GroupingComboBoxItem(GroupingEntity.GROUP, g.getName()));
-			
-			if(item != null) {
-				
-				int count = visibility.getItemCount();
-				for(int i = 0; i < count; i++) {
-					
-					GroupingComboBoxItem currentItem = (GroupingComboBoxItem) visibility.getItemAt(i);
-					if(currentItem.getValue().equals(item.getValue()))
-						visibility.setSelectedIndex(i);
-				}
-				
 			}
-				
+
+			if (item != null) {
+				int count = visibility.getItemCount();
+				for (int i = 0; i < count; i++) {
+					GroupingComboBoxItem currentItem = (GroupingComboBoxItem) visibility.getItemAt(i);
+					if (currentItem.getValue().equals(item.getValue())) {
+						visibility.setSelectedIndex(i);
+					}
+				}
+
+			}
+
 		} catch (AuthenticationException ex) {
-			
 			(new ShowSettingsDialogAction(jabRefFrame)).actionPerformed(null);
 		} catch (Exception ex) {
-			
 			LOG.error("Failed to get user details for user: " + PluginProperties.getUsername(), ex);
 		}
 	}

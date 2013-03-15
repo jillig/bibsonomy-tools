@@ -39,16 +39,16 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.bibsonomy.model.Post;
 import org.bibsonomy.model.Resource;
+import org.bibsonomy.model.logic.LogicInterface;
 import org.bibsonomy.plugin.jabref.PluginProperties;
 import org.bibsonomy.plugin.jabref.gui.CompareDialog;
 import org.bibsonomy.plugin.jabref.util.BibtexEntryUtil;
 import org.bibsonomy.plugin.jabref.util.JabRefModelConverter;
 import org.bibsonomy.plugin.jabref.util.WorkerUtil;
-import org.bibsonomy.rest.client.Bibsonomy;
-import org.bibsonomy.rest.client.queries.get.GetPostDetailsQuery;
 
 /**
  * Basic synchronization. The user decides which version of the post to keep
+ * 
  * @author Waldemar Biller <wbi@cs.uni-kassel.de>
  * 
  */
@@ -61,6 +61,7 @@ public class SynchronizationWorker extends AbstractPluginWorker {
 	private boolean keepAllLocal = false;
 
 	private boolean keepAllRemote = false;
+
 	private int status = 0;
 
 	public SynchronizationWorker(final JabRefFrame jabRefFrame) {
@@ -84,6 +85,7 @@ public class SynchronizationWorker extends AbstractPluginWorker {
 		// Set of id to be removed from the database
 		final HashSet<String> removeIds = new HashSet<String>();
 
+		LogicInterface logic = getLogic();
 		// Iterate over all entries in the database
 		for (final BibtexEntry entry : db.getEntries()) {
 
@@ -91,19 +93,13 @@ public class SynchronizationWorker extends AbstractPluginWorker {
 
 			// check if intrahash is present, otherwise go to next entry
 			if ((intrahash == null) || (intrahash.length() == 0)) {
+				// TODO: new entries shall not be added to bibsonomy? 
 				continue;
 			}
 
 			try {
 				// get the entry with the specific intrahash
-				final GetPostDetailsQuery gpq = new GetPostDetailsQuery(PluginProperties.getUsername(), intrahash);
-
-				final Bibsonomy bibsonomy = new Bibsonomy(PluginProperties.getUsername(), PluginProperties.getApiKey());
-				bibsonomy.setApiURL(PluginProperties.getApiUrl());
-				
-				bibsonomy.executeQuery(gpq);
-
-				final Post<? extends Resource> post = gpq.getResult();
+				final Post<? extends Resource> post = logic.getPostDetails(intrahash, PluginProperties.getUsername());
 
 				if (!BibtexEntryUtil.areEqual(entry, JabRefModelConverter.convertPost(post))) {
 
@@ -120,13 +116,13 @@ public class SynchronizationWorker extends AbstractPluginWorker {
 						this.keepAllLocal = true;
 						this.keepAllRemote = false;
 					case CompareDialog.KEEP_LOCAL:
-						
+
 						final List<BibtexEntry> entries = new LinkedList<BibtexEntry>();
 						entries.add(entry);
-						
+
 						ExportWorker worker = new ExportWorker(this.jabRefFrame, entries);
 						WorkerUtil.performAsynchronously(worker);
-						
+
 						break;
 
 					// fetch the entry if the user choose "keep remote"
@@ -134,7 +130,7 @@ public class SynchronizationWorker extends AbstractPluginWorker {
 						this.keepAllLocal = false;
 						this.keepAllRemote = true;
 					case CompareDialog.KEEP_REMOTE:
-						
+
 						// collect ids of entry to be removed
 						removeIds.add(entry.getId());
 						// collect the fetched entries
@@ -152,8 +148,8 @@ public class SynchronizationWorker extends AbstractPluginWorker {
 			} catch (Throwable e) {
 				LOG.error("error during synchronization", e);
 			}
-			
-			this.jabRefFrame.output("Synchronized " + entry.getCiteKey() );
+
+			this.jabRefFrame.output("Synchronized " + entry.getCiteKey());
 
 		}
 

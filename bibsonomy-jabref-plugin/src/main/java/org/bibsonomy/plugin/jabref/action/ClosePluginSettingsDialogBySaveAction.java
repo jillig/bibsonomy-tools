@@ -48,6 +48,7 @@ public class ClosePluginSettingsDialogBySaveAction extends AbstractAction {
 
 
 	private static final long serialVersionUID = 2629139512763809317L;
+	private JTextField apiUrl;
 	private JTextField username;
 	private JTextField apiKey;
 	private JCheckBox saveApiKey;
@@ -57,14 +58,15 @@ public class ClosePluginSettingsDialogBySaveAction extends AbstractAction {
 	private JCheckBox updateTags;
 	private JCheckBox uploadDocuments;
 	private JCheckBox downloadDocuments;
-	private JComboBox visibility;
+	private JComboBox<?> visibility;
 	private JCheckBox morePosts;
 	private JTextField extraFields;
 	private PluginSettingsDialog settingsDialog;
-	private JComboBox order;
+	private JComboBox<?> order;
 
 	public void actionPerformed(ActionEvent e) {
 	
+		PluginProperties.setApiUrl(apiUrl.getText());
 		PluginProperties.setUsername(username.getText());
 		PluginProperties.setApiKey(apiKey.getText());
 		PluginProperties.setStoreApiKey(saveApiKey.isSelected());
@@ -83,14 +85,15 @@ public class ClosePluginSettingsDialogBySaveAction extends AbstractAction {
 		settingsDialog.setVisible(false);
 	}
 
-	public ClosePluginSettingsDialogBySaveAction(PluginSettingsDialog settingsDialog, JTextField username, JTextField apiKey, 
+	public ClosePluginSettingsDialogBySaveAction(PluginSettingsDialog settingsDialog, JTextField apiUrl, JTextField username, JTextField apiKey, 
 												 JCheckBox saveApiKey, JSpinner numberOfPosts, 
 												 JSpinner tagCloudSize, JCheckBox ignoreNoTagsAssigned, 
 												 JCheckBox updateTags, JCheckBox uploadDocuments, 
-												 JCheckBox downloadDocuments, JComboBox visibility, 
-												 JCheckBox morePosts, JTextField extraFields, JComboBox order) {
+												 JCheckBox downloadDocuments, JComboBox<?> visibility, 
+												 JCheckBox morePosts, JTextField extraFields, JComboBox<?> order) {
 		
 		super("Save", new ImageIcon(ClosePluginSettingsDialogBySaveAction.class.getResource("/images/disk-black.png")));
+		this.apiUrl = apiUrl;
 		this.settingsDialog = settingsDialog;
 		this.username = username;
 		this.apiKey = apiKey;

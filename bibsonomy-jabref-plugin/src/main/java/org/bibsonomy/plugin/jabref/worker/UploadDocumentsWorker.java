@@ -32,9 +32,9 @@ import net.sf.jabref.JabRefPreferences;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.bibsonomy.model.Document;
+import org.bibsonomy.model.logic.LogicInterface;
 import org.bibsonomy.plugin.jabref.PluginProperties;
-import org.bibsonomy.rest.client.Bibsonomy;
-import org.bibsonomy.rest.client.queries.post.CreatePostDocumentQuery;
 
 /**
  * Upload documents from the file system directly to the service.
@@ -61,17 +61,14 @@ public class UploadDocumentsWorker extends AbstractPluginWorker {
 	private String files;
 
 	public void run() {
-		
 		// abort upload if user disabled the option
-		if(!PluginProperties.getUploadDocumentsOnExport())
+		if (!PluginProperties.getUploadDocumentsOnExport()) {
 			return;
+		}
 		
-		Bibsonomy client = new Bibsonomy(PluginProperties.getUsername(), PluginProperties.getApiKey());
-		client.setApiURL(PluginProperties.getApiUrl());
-		
+		LogicInterface logic = getLogic();
 		// split the filey by ; character
-		for(String file : files.split(";")) {
-			
+		for (String file : files.split(";")) {			
 			// get file name
 			int firstColonPosition = file.indexOf(":");
 			int lastColonPosition = file.lastIndexOf(":");
@@ -88,9 +85,15 @@ public class UploadDocumentsWorker extends AbstractPluginWorker {
 					if(f.exists()) {
 						
 						// upload the document
-						CreatePostDocumentQuery createPostDocumentQuery = new CreatePostDocumentQuery(PluginProperties.getUsername(), intrahash, f);
+						
+						
+						final Document doc = new Document();
+						doc.setFile(f);
+						doc.setUserName(PluginProperties.getUsername());
+						logic.createDocument(doc, intrahash);
+						
 						jabRefFrame.output("Uploading document " + fileName);
-						client.executeQuery(createPostDocumentQuery);
+						
 						break;
 					}
 					

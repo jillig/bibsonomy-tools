@@ -48,7 +48,7 @@ public class RefreshTagListAction extends AbstractPluginAction {
 	
 	private JEditorPane tagCloud;
 
-	private JComboBox groupingComboBox;
+	private JComboBox<? super GroupingComboBoxItem> groupingComboBox;
 
 	public void actionPerformed(ActionEvent e) {
 	
@@ -61,7 +61,7 @@ public class RefreshTagListAction extends AbstractPluginAction {
 		performAsynchronously(visWorker);
 	}
 
-	public RefreshTagListAction(JabRefFrame jabRefFrame, JEditorPane tagCloud, JComboBox groupingComboBox) {
+	public RefreshTagListAction(JabRefFrame jabRefFrame, JEditorPane tagCloud, JComboBox<? super GroupingComboBoxItem> groupingComboBox) {
 		
 		super(jabRefFrame, "Refresh", new ImageIcon(RefreshTagListAction.class.getResource("/images/arrow-circle-225.png")));
 		this.tagCloud = tagCloud;

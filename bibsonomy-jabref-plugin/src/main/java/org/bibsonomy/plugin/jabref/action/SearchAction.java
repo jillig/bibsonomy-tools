@@ -49,9 +49,9 @@ public class SearchAction extends AbstractPluginAction {
 
 	private JTextField searchTextField;
 
-	private JComboBox searchTypeComboBox;
+	private JComboBox<?> searchTypeComboBox;
 
-	private JComboBox groupingComboBox;
+	private JComboBox<?> groupingComboBox;
 
 	public void actionPerformed(ActionEvent e) {
 		
@@ -64,7 +64,7 @@ public class SearchAction extends AbstractPluginAction {
 		}
 	}
 
-	public SearchAction(JabRefFrame jabRefFrame, JTextField searchTextField, JComboBox searchTypeComboBox, JComboBox groupingComboBox) {
+	public SearchAction(JabRefFrame jabRefFrame, JTextField searchTextField, JComboBox<?> searchTypeComboBox, JComboBox<?> groupingComboBox) {
 		
 		super(jabRefFrame, "", new ImageIcon(SearchAction.class.getResource("/images/magnifier.png")));
 		

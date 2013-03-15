@@ -30,8 +30,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Properties;
 
-import javax.management.InstanceAlreadyExistsException;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.bibsonomy.common.enums.GroupingEntity;
@@ -283,5 +281,9 @@ public class PluginProperties extends Properties {
 	public static void setTagCloudOrder(Order order) {
 		
 		getInstance().setProperty(PLUGIN_TAG_CLOUD_ORDER, order.toString());
+	}
+
+	public static void setApiUrl(String text) {
+		getInstance().setProperty(API_URL, text);
 	}
 }

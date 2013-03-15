@@ -25,16 +25,14 @@
 
 package org.bibsonomy.plugin.jabref.worker;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.bibsonomy.plugin.jabref.PluginProperties;
-import org.bibsonomy.plugin.jabref.action.ShowSettingsDialogAction;
-import org.bibsonomy.rest.client.Bibsonomy;
-import org.bibsonomy.rest.client.queries.delete.DeletePostQuery;
-import org.bibsonomy.rest.exceptions.AuthenticationException;
+import java.util.Arrays;
 
 import net.sf.jabref.BibtexEntry;
 import net.sf.jabref.JabRefFrame;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.bibsonomy.plugin.jabref.PluginProperties;
 
 /**
  * Delete a Post from the service
@@ -49,29 +47,18 @@ public class DeletePostsWorker extends AbstractPluginWorker {
 	private BibtexEntry[] entries;
 
 	public void run() {
-		
-		Bibsonomy client = new Bibsonomy(PluginProperties.getUsername(), PluginProperties.getApiKey());
-		client.setApiURL(PluginProperties.getApiUrl());
-		
-		for(BibtexEntry entry : entries) {
-			
-			String intrahash = entry.getField("intrahash");
-			String username = entry.getField("username");
-			if(intrahash == null || "".equals(intrahash) || (intrahash != null && !PluginProperties.getUsername().equals(username)))
+		for (BibtexEntry entry : entries) {
+			final String intrahash = entry.getField("intrahash");
+			final String username = entry.getField("username");
+			if ((intrahash == null) || ("".equals(intrahash)) || ((intrahash != null) && !(PluginProperties.getUsername().equals(username)))) {
 				continue;
+			}
 			
-			DeletePostQuery deletePostQuery = new DeletePostQuery(PluginProperties.getUsername(), intrahash);
 			try {
-				
-				client.executeQuery(deletePostQuery);
+				getLogic().deletePosts(PluginProperties.getUsername(), Arrays.asList(intrahash));
 				jabRefFrame.output("Deleting post " + intrahash);
 				entry.clearField("intrahash");
-				entry.clearField("interhash");
-			} catch(AuthenticationException ex) {
-				
-				(new ShowSettingsDialogAction(jabRefFrame)).actionPerformed(null);
-			} catch(Exception ex) {
-				
+			} catch (Exception ex) {
 				LOG.error("Failed deleting post " + intrahash);
 			}
 		}
@@ -79,7 +66,6 @@ public class DeletePostsWorker extends AbstractPluginWorker {
 	}
 
 	public DeletePostsWorker(JabRefFrame jabRefFrame, BibtexEntry[] entries) {
-		
 		this.jabRefFrame = jabRefFrame;
 		this.entries = entries;
 	}

@@ -29,9 +29,10 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JComboBox;
 
-import org.bibsonomy.plugin.jabref.worker.UpdateVisibilityWorker;
-
 import net.sf.jabref.JabRefFrame;
+
+import org.bibsonomy.plugin.jabref.gui.GroupingComboBoxItem;
+import org.bibsonomy.plugin.jabref.worker.UpdateVisibilityWorker;
 
 /**
  * {@link UpdateVisibilityAction} runs the {@link UpdateVisibilityWorker}
@@ -42,9 +43,9 @@ public class UpdateVisibilityAction extends AbstractPluginAction {
 
 	private static final long serialVersionUID = 2487196975142597818L;
 	
-	private JComboBox visibility;
+	private JComboBox<GroupingComboBoxItem> visibility;
 
-	public UpdateVisibilityAction(JabRefFrame jabRefFrame, JComboBox visibility) {
+	public UpdateVisibilityAction(JabRefFrame jabRefFrame, JComboBox<GroupingComboBoxItem> visibility) {
 		super(jabRefFrame, null, null);
 		
 		this.visibility = visibility;

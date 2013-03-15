@@ -57,12 +57,12 @@ public class PluginSidePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JPanel controlsPanel = null;
 	private JTextField searchTextField = null;
-	private JComboBox searchTypeComboBox = null;
+	private JComboBox<?> searchTypeComboBox = null;
 	private JButton searchButton = null;
 	private JPanel tagsPanel = null;
 	private JButton tagsUpdateButton = null;
 	private JPanel visibilityPanel = null;
-	private JComboBox visibilityComboBox = null;
+	private JComboBox<GroupingComboBoxItem> visibilityComboBox = null;
 	private JabRefFrame jabRefFrame;
 	private JScrollPane tagListScrollPane = null;
 	private JButton settingsButton = null;
@@ -173,14 +173,14 @@ public class PluginSidePanel extends JPanel {
 	 * 	
 	 * @return javax.swing.JComboBox	
 	 */
-	private JComboBox getSearchTypeComboBox() {
+	private JComboBox<?> getSearchTypeComboBox() {
 		if (searchTypeComboBox == null) {
 			
 			SearchTypeComboBoxItem[] items = new SearchTypeComboBoxItem[] {
 					new SearchTypeComboBoxItem(SearchType.FULL_TEXT, "Full text"),
 					new SearchTypeComboBoxItem(SearchType.TAGS, "Tag")
 			};
-			searchTypeComboBox = new JComboBox(items);
+			searchTypeComboBox = new JComboBox<Object>(items);
 			
 			
 		}
@@ -278,7 +278,7 @@ public class PluginSidePanel extends JPanel {
 	 * 	
 	 * @return javax.swing.JComboBox	
 	 */
-	private JComboBox getVisibilityComboBox() {
+	private JComboBox<GroupingComboBoxItem> getVisibilityComboBox() {
 		if (visibilityComboBox == null) {
 			
 			GroupingComboBoxItem[] items = new GroupingComboBoxItem[] {
@@ -287,7 +287,7 @@ public class PluginSidePanel extends JPanel {
 				new GroupingComboBoxItem(GroupingEntity.ALL, "all users"),
 			};
 
-			visibilityComboBox = new JComboBox(items);
+			visibilityComboBox = new JComboBox<GroupingComboBoxItem>(items);
 			(new UpdateVisibilityAction(jabRefFrame, visibilityComboBox)).actionPerformed(null);
 			visibilityComboBox.addItemListener(new VisibilityItemListener());
 		}
